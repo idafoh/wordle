@@ -1,19 +1,41 @@
-# Nuxt 3 Minimal Starter
+# SÓZLE (a.k.a WORDLE)
 
-Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
+### The purpose of this game is to collect an open database of [Karakalpak](https://en.wikipedia.org/wiki/Karakalpak_language) words
 
-## Setup
+
+Download database:
+
+Send HTTP GET request to `https://sozle.qaraqalpaq.org/api/db` and then rename the downloaded file with extension `.sqlite3`
+
+Database schema:
+
+`id`  - autoincrement primary key
+`word` - 5 letter word candidate
+`score` - float between 0 and 1 to check how real word is. (currently guessed words get 0 shared words 0.3)
+
+| id  | word  | score | 
+| --- | ----- | ----- |
+| 1   | qálem |   0   |
+| 2   | sálem |  0.3  |
+
+
+## Phase 1
+
+Collect as many as possible words. Currently, the score for guessed words is 0, and for shared words 0.3
+
+## Phase 2
+
+We have to re-score all possible word candidates. (How? IDK I haven't planned yet.)
+
+### Found mistakes or ideas
+
+Feel free to create an issue or PR
+
+## Local Setup
 
 Make sure to install the dependencies:
 
 ```bash
-# yarn
-yarn install
-
-# npm
-npm install
-
-# pnpm
 pnpm install --shamefully-hoist
 ```
 
@@ -22,7 +44,7 @@ pnpm install --shamefully-hoist
 Start the development server on http://localhost:3000
 
 ```bash
-npm run dev
+pnpm dev -o
 ```
 
 ## Production
@@ -30,13 +52,11 @@ npm run dev
 Build the application for production:
 
 ```bash
-npm run build
+pnpm build
 ```
 
 Locally preview production build:
 
 ```bash
-npm run preview
+pnpm preview
 ```
-
-Checkout the [deployment documentation](https://v3.nuxtjs.org/guide/deploy/presets) for more information.
