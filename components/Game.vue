@@ -1,10 +1,16 @@
 <script setup lang="ts">
-import { getWordOfTheDay, allWords } from '~/words'
+import { getWordOfTheDay } from '~/words'
 import { LetterState } from '~/types'
 
+// get all words from db
+const res = await useAsyncData('words', async () => {
+  const { data } = await useFetch('/api/all-words')
+
+  return data.value
+})
 
 // Get word of the day
-const answer = getWordOfTheDay()
+const answer = getWordOfTheDay(res.data.value)
 
 // Board state. Each tile is represented as { letter, state }
 const board = ref(
@@ -33,13 +39,14 @@ const letterStates: Record<string, LetterState> = ref({})
 // Handle keyboard input.
 let allowInput = true
 
-if (process.browser) {
-  const onKeyup = (e: KeyboardEvent) => onKey(e.key)
+const onKeyup = (e: KeyboardEvent) => onKey(e.key)
+
+onMounted(() => {
   window.addEventListener('keyup', onKeyup)
-  onUnmounted(() => {
-    window.removeEventListener('keyup', onKeyup)
-  })
-}
+})
+onUnmounted(() => {
+  window.removeEventListener('keyup', onKeyup)
+})
 
 function onKey(key: string) {
   if (!allowInput) return
@@ -81,22 +88,24 @@ function clearTile() {
 
 
 function completeRow() {
-  if (currentRow.value.every((tile) => tile.letter)) {
-    const guess = currentRow.value.map((tile) => tile.letter).join('')
+  const guess = currentRow.value.map((tile) => tile.letter).join('')
 
-    useFetch('/api/word', {
-      method: 'POST',
-      body: { word: guess }
-    })
+  useFetch('/api/word', {
+    method: 'POST',
+    body: { word: guess },
+    initialCache: false,
+  })
+  
+  if (currentRow.value.every((tile) => tile.letter)) {
 
     // if (!allWords.includes(guess) && guess !== answer) {
     //   shake()
     //   showMessage(`Not in word list`)
     //   return
     // }
-    
+
     const answerLetters: (string | null)[] = answer.split('')
-    
+
     // first pass: mark correct ones
     currentRow.value.forEach((tile, i) => {
       if (answerLetters[i] === tile.letter) {
@@ -104,7 +113,7 @@ function completeRow() {
         answerLetters[i] = null
       }
     })
-    
+
     // second pass: mark the present
     currentRow.value.forEach((tile) => {
       if (!tile.state && answerLetters.includes(tile.letter)) {
@@ -115,7 +124,7 @@ function completeRow() {
         }
       }
     })
-    
+
     // 3rd pass: mark absent
     currentRow.value.forEach((tile) => {
       if (!tile.state) {
