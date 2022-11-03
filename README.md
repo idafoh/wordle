@@ -1,4 +1,8 @@
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/dauletbaev/wordle/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/dauletbaev/wordle/tree/main)
+
 # SÓZLE (a.k.a WORDLE)
+
+![preview](./preview.png)
 
 ### The purpose of this game is to collect an open database of [Karakalpak](https://en.wikipedia.org/wiki/Karakalpak_language) words
 
