@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const { trackEvent } = usePlausible()
+
 const infoPopup = ref(true)
 const isOpen = ref(false)
 const word = ref('')
@@ -22,16 +24,22 @@ const createUri = () => {
   }
 
   const encodedWord = btoa(word.value)
-  const url = `http://localhost:3000/?w=${encodeURIComponent(encodedWord)}`
+  const url = `https://sozle.qaraqalpaq.org/?w=${encodeURIComponent(encodedWord)}`
 
   useFetch('/api/word', {
     method: 'POST',
-    body: { word, score: 0.3 }
+    body: { word: word.value, score: 0.3 }
   })
 
   navigator.clipboard.writeText(url)
   closeModal()
+  trackEvent('share-word', { props: { word: word.value } })
   alert('Nusqalap alındı')
+}
+
+const understandInitalPopUp = () => {
+  infoPopup.value = false
+  trackEvent('understood')
 }
 
 onMounted(() => {
@@ -56,18 +64,22 @@ onUnmounted(() => {
         tawdıńız, eger 🟨 reńde bolsa bul háripte sol sózde bar biraq ornı almasıp turıptı.<br />Al eger ⬜ bolsa bul
         hárip jasırılǵan sózde qollanılmaǵan.</p>
 
-      
-      <p style="margin: 3rem 0;">Oyındı jánede qızıqlı etiw maqsetinde ózińiz sóz qosıp doslarıńızǵa jiberip oynasańızda boladı.</p>
+
+      <p style="margin: 3rem 0;">Oyındı jánede qızıqlı etiw maqsetinde ózińiz sóz qosıp doslarıńızǵa jiberip oynasańızda
+        boladı.</p>
 
 
       <p><span style="color:salmon">Esletpe</span>: Siz bul oyındı oynap qaraqalpaq tiliniń rawajlanıwına óz úlesińizdi
         qosıwıńız múmkin. Sol sebepli ilájı barınsha haqıyqattan da bar bolǵan sózlerdi kiritiwińizdi sorap qalamız.</p>
 
-      <button @click="infoPopup = false">Túsindim</button>
+      <button @click="understandInitalPopUp">Túsindim</button>
     </div>
   </pop-up>
   <pop-up>
     <div v-if="isOpen" :class="$style.modal">
+      <teleport to="body">
+        <div @click="isOpen = false" :class="$style.backdrop" />
+      </teleport>
       <p>Sózdi kiritiń</p>
       <input v-model="word" type="text" placeholder="Mısalı: sálem" maxlength="5" minlength="5" />
       <button @click="createUri">Úlesiw</button>
