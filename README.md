@@ -4,6 +4,8 @@
 
 ![preview](./preview.png)
 
+[Qaraqalpaqsha oqıw](https://abat.me/blog/sozle-ecc6706f)
+
 ### The purpose of this game is to collect an open database of [Karakalpak](https://en.wikipedia.org/wiki/Karakalpak_language) words
 
 
@@ -64,3 +66,8 @@ Locally preview production build:
 ```bash
 pnpm preview
 ```
+
+
+## Acknowledgments
+
+* [Vue Wordle by Evan You](https://github.com/yyx990803/vue-wordle)
