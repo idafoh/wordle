@@ -1,13 +1,9 @@
 <script setup lang="ts">
-const { trackPageview } = usePlausible()
-
 onMounted(() => {
   // resize for scaling the board size
   window.addEventListener('resize', onResize)
   // set size on startup
   onResize()
-
-  trackPageview()
 })
 
 function onResize() {

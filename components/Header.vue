@@ -1,6 +1,4 @@
 <script setup lang="ts">
-const { trackEvent } = usePlausible()
-
 const infoPopup = ref(true)
 const isOpen = ref(false)
 const word = ref('')
@@ -33,13 +31,13 @@ const createUri = () => {
 
   navigator.clipboard.writeText(url)
   closeModal()
-  trackEvent('share-word', { props: { word: word.value } })
+  useTrackEvent('share-word', { props: { word: word.value } })
   alert('Nusqalap alındı')
 }
 
 const understandInitalPopUp = () => {
   infoPopup.value = false
-  trackEvent('understood')
+  useTrackEvent('understood')
 }
 
 onMounted(() => {

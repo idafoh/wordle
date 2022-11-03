@@ -11,7 +11,7 @@
     "nuxt": "3.0.0-rc.12"
   },
   "dependencies": {
-    "@huntersofbook/plausible-nuxt": "^0.4.1",
+    "nuxt-plausible": "^0.1.1",
     "sqlite3": "^5.1.2"
   }
 }

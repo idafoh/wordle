@@ -2,8 +2,6 @@
 import { getWordOfTheDay } from '~/words'
 import { LetterState } from '~/types'
 
-const { trackEvent } = usePlausible()
-
 // get all words from db
 const res = await useAsyncData('words', async () => {
   const { data } = await useFetch('/api/all-words')
@@ -98,7 +96,7 @@ function completeRow() {
     initialCache: false,
   })
 
-  trackEvent('guess', { props: { word: guess } })
+  useTrackEvent('guess', { props: { word: guess } })
   
   if (currentRow.value.every((tile) => tile.letter)) {
 

@@ -1,12 +1,12 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@huntersofbook/plausible-nuxt': ^0.4.1
   nuxt: 3.0.0-rc.12
+  nuxt-plausible: ^0.1.1
   sqlite3: ^5.1.2
 
 dependencies:
-  '@huntersofbook/plausible-nuxt': 0.4.1
+  nuxt-plausible: 0.1.1
   sqlite3: 5.1.2
 
 devDependencies:
@@ -316,26 +316,6 @@ packages:
     resolution: {integrity: sha512-k2Ty1JcVojjJFwrg/ThKi2ujJ7XNLYaFGNB/bWT9wGR+oSMJHMa5w+CUq6p/pVrKeNNgA7pCqEcjSnHVoqJQFw==}
     dev: false
     optional: true
-
-  /@huntersofbook/plausible-nuxt/0.4.1:
-    resolution: {integrity: sha512-RKCpFFpcq0ogxqT1lkITT1WwcPt23POgj4VfM3VVyV8iywvYrwzH7W5qNA0ROkfCel8JqN+leYVxyGzxoIx8Ag==}
-    dependencies:
-      '@huntersofbook/plausible-vue': 0.4.1
-      '@nuxt/kit': 3.0.0-rc.12
-      defu: 6.1.0
-    transitivePeerDependencies:
-      - supports-color
-      - vue
-    dev: false
-
-  /@huntersofbook/plausible-vue/0.4.1:
-    resolution: {integrity: sha512-GNFtIjKiBhBJLjENcDIoKNwC9X3FATh55tRskyzeHWJ9cnWId6r4viV70prXk7mwFm4UbDn1xDCrf5IxTU2nZg==}
-    peerDependencies:
-      vue: ^3.2.41
-    dependencies:
-      defu: 6.1.0
-      plausible-tracker: 0.3.8
-    dev: false
 
   /@ioredis/commands/1.2.0:
     resolution: {integrity: sha512-Sx1pU8EM64o2BrqNpEO1CNLtKQwyhuXuqyfH7oGKCk+1a33d2r5saW8zNwm3j6BTExtjrv2BxTgzzkMwts6vGg==}
@@ -3161,6 +3141,17 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
+
+  /nuxt-plausible/0.1.1:
+    resolution: {integrity: sha512-cqo8jWXpx5g+lJgDJNsPBiDlnVCha0AMtg+fPtR2V0pZj2JkEjKLG57iA/uayW9jOFicWmWJtNmuH/ajJFjaNw==}
+    dependencies:
+      '@nuxt/kit': 3.0.0-rc.12
+      defu: 6.1.0
+      pathe: 0.3.9
+      plausible-tracker: 0.3.8
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
 
   /nuxt/3.0.0-rc.12:
     resolution: {integrity: sha512-VhSod1u/w+C3VWsagTd5Prnsjk/VxPRt/bbADhUz3l0zxxajHRhHFX4xZSJWNgzsakducDqhn7N1pY6Ukko9kg==}

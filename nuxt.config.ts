@@ -1,7 +1,7 @@
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   modules: [
-    '@huntersofbook/plausible-nuxt'
+    'nuxt-plausible'
   ],
   css: ['~/assets/styles/game.css'],
   app: {
@@ -13,9 +13,6 @@ export default defineNuxtConfig({
     },
   },
   plausible: {
-    init: {
-      domain: 'sozle.qaraqalpaq.org',
-      trackLocalhost: false,
-    },
+    domain: 'sozle.qaraqalpaq.org',
   }
 })
