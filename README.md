@@ -8,22 +8,20 @@
 
 ### The purpose of this game is to collect an open database of [Karakalpak](https://en.wikipedia.org/wiki/Karakalpak_language) words
 
-
 Download database:
 
 Send HTTP GET request to `https://sozle.qaraqalpaq.org/api/db` and then rename the downloaded file with extension `.sqlite3`
 
 Database schema:
 
-`id`  - autoincrement primary key
+`id` - autoincrement primary key
 `word` - 5 letter word candidate
 `score` - float between 0 and 1 to check how real word is. (currently guessed words get 0 shared words 0.3)
 
-| id  | word  | score | 
+| id  | word  | score |
 | --- | ----- | ----- |
-| 1   | qálem |   0   |
-| 2   | sálem |  0.3  |
-
+| 1   | qálem | 0     |
+| 2   | sálem | 0.3   |
 
 ## Phase 1
 
@@ -67,7 +65,7 @@ Locally preview production build:
 pnpm preview
 ```
 
-
 ## Acknowledgments
 
-* [Vue Wordle by Evan You](https://github.com/yyx990803/vue-wordle)
+- [Sózlik by Shaǵalalab](https://github.com/shagalalab/sozlik-web)
+- [Vue Wordle by Evan You](https://github.com/yyx990803/vue-wordle)

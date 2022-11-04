@@ -2,15 +2,8 @@
 import { getWordOfTheDay } from '~/words'
 import { LetterState } from '~/types'
 
-// get all words from db
-const res = await useAsyncData('words', async () => {
-  const { data } = await useFetch('/api/all-words')
-
-  return data.value
-})
-
 // Get word of the day
-const answer = getWordOfTheDay(res.data.value)
+const answer = getWordOfTheDay()
 
 // Board state. Each tile is represented as { letter, state }
 const board = ref(
