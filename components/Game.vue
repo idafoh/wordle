@@ -31,7 +31,7 @@ const success = ref(false)
 const letterStates: Record<string, LetterState> = ref({})
 
 // Handle keyboard input.
-let allowInput = true
+const allowInput = ref(true)
 
 const onKeyup = (e: KeyboardEvent) => onKey(e.key)
 
@@ -57,11 +57,11 @@ function restartWithRandomWord() {
   shakeRowIndex.value = -1
   success.value = false
 
-  allowInput = true
+  allowInput.value = true
 }
 
 function onKey(key: string) {
-  if (!allowInput) return
+  if (!allowInput.value) return
 
   switch (key) {
     case 'Backspace':
@@ -122,19 +122,23 @@ function completeRow() {
 
     // first pass: mark correct ones
     currentRow.value.forEach((tile, i) => {
-      if (answerLetters[i] === tile.letter) {
-        tile.state = letterStates.value[tile.letter] = LetterState.CORRECT
+      const letter = tile.letter === 'Í' ? 'ı' : tile.letter
+
+      if (answerLetters[i] === letter) {
+        tile.state = letterStates.value[letter] = LetterState.CORRECT
         answerLetters[i] = null
       }
     })
 
     // second pass: mark the present
     currentRow.value.forEach((tile) => {
-      if (!tile.state && answerLetters.includes(tile.letter)) {
+      const letter = tile.letter === 'Í' ? 'ı' : tile.letter
+
+      if (!tile.state && answerLetters.includes(letter)) {
         tile.state = LetterState.PRESENT
-        answerLetters[answerLetters.indexOf(tile.letter)] = null
-        if (!letterStates.value[tile.letter]) {
-          letterStates.value[tile.letter] = LetterState.PRESENT
+        answerLetters[answerLetters.indexOf(letter)] = null
+        if (!letterStates.value[letter]) {
+          letterStates.value[letter] = LetterState.PRESENT
         }
       }
     })
@@ -142,14 +146,15 @@ function completeRow() {
     // 3rd pass: mark absent
     currentRow.value.forEach((tile) => {
       if (!tile.state) {
+        const letter = tile.letter === 'Í' ? 'ı' : tile.letter
         tile.state = LetterState.ABSENT
-        if (!letterStates.value[tile.letter]) {
-          letterStates.value[tile.letter] = LetterState.ABSENT
+        if (!letterStates.value[letter]) {
+          letterStates.value[letter] = LetterState.ABSENT
         }
       }
     })
 
-    allowInput = false
+    allowInput.value = false
 
     if (currentRow.value.every((tile) => tile.state === LetterState.CORRECT)) {
       // yay!
@@ -167,7 +172,7 @@ function completeRow() {
       // go the next row
       currentRowIndex.value++
       setTimeout(() => {
-        allowInput = true
+        allowInput.value = true
       }, 1600)
     } else {
       // game over :(
@@ -218,12 +223,12 @@ function genResultGrid() {
   <Transition>
     <div :class="$style.message" v-if="message.length > 0">
       <teleport to="body">
-        <div @click="message = ''" id="backdrop" />
+        <div @click="message = 'Oyın juwmaqlandı'" id="backdrop" />
       </teleport>
       {{ message }}
       <pre v-if="grid">{{ grid }}</pre>
 
-      <button @click="restartWithRandomWord">Jáne random sóz benen oynaw</button>
+      <button v-if="!allowInput" @click="restartWithRandomWord">Jáne random sóz benen oynaw</button>
     </div>
   </Transition>
   <div :class="$style.board">
@@ -279,6 +284,8 @@ function genResultGrid() {
 .message button {
   height: auto;
   padding: 10px 1rem;
+  margin: 0 auto;
+  margin-top: 1.5rem;
 }
 
 .message.v-leave-to {
@@ -431,6 +438,14 @@ function genResultGrid() {
 @media (max-height: 680px) {
   .tile {
     font-size: 3vh;
+  }
+}
+
+@media (max-width: 600px) {
+  .message {
+    width: 80%;
+    top: 35%;
+    padding: 1rem;
   }
 }
 </style>
