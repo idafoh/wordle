@@ -8,11 +8,16 @@ export default defineNuxtConfig({
     head: {
       title: 'Sózle',
       meta: [
-        { name: 'description', content: 'Qaraqalpaqsha wordle (sóz oyını).' }
+        { property: 'og:title', content: 'Sózle' },
+        { property: 'og:url', content: 'https://sozle.qaraqalpaq.org' },
+        { property: 'og:image', content: '/og.svg' },
+        { property: 'og:image:width', content: '800' },
+        { property: 'og:image:height', content: '400' },
+        { name: 'description', content: 'Qaraqalpaqsha wordle (sóz oyını).' },
       ],
     },
   },
   plausible: {
     domain: 'sozle.qaraqalpaq.org',
-  }
+  },
 })
