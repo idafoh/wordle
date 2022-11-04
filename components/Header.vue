@@ -53,7 +53,7 @@ onUnmounted(() => {
   <pop-up>
     <div v-if="infoPopup" :class="$style.modal">
       <teleport to="body">
-        <div @click="infoPopup = false" :class="$style.backdrop" />
+        <div @click="infoPopup = false" id="backdrop" />
       </teleport>
       <p>Sálem bul sózle oyını</p>
 
@@ -76,7 +76,7 @@ onUnmounted(() => {
   <pop-up>
     <div v-if="isOpen" :class="$style.modal">
       <teleport to="body">
-        <div @click="isOpen = false" :class="$style.backdrop" />
+        <div @click="isOpen = false" id="backdrop" />
       </teleport>
       <p>Sózdi kiritiń</p>
       <input v-model="word" type="text" placeholder="Mısalı: sálem" maxlength="5" minlength="5" />
@@ -92,16 +92,6 @@ onUnmounted(() => {
 <style module>
 .custom {
   cursor: pointer;
-}
-
-.backdrop {
-  position: fixed;
-  background-color: rgba(0, 0, 0, 0.3);
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  z-index: 1;
 }
 
 .modal {

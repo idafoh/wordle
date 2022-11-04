@@ -197,7 +197,10 @@ function genResultGrid() {
 
 <template>
   <Transition>
-    <div :class="$style.message" v-if="message">
+    <div :class="$style.message" v-if="message.length > 0">
+      <teleport to="body">
+        <div @click="message = ''" id="backdrop" />
+      </teleport>
       {{ message }}
       <pre v-if="grid">{{ grid }}</pre>
     </div>
