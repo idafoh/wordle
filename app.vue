@@ -15,4 +15,7 @@ function onResize() {
 <template>
   <Header />
   <Game />
+  <footer>
+    Jaratıwshı: <a href="https://abat.me" rel="noopener noreferrer" target="_blank">Abat Dauletbaev</a>
+  </footer>
 </template>

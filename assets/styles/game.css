@@ -23,6 +23,10 @@ header {
   justify-content: space-between;
 }
 
+footer {
+  margin-top: 1.5rem;
+}
+
 #backdrop {
   position: fixed;
   background-color: rgba(0, 0, 0, 0.3);
@@ -62,6 +66,11 @@ header {
   header {
     margin-top: 1rem;
     padding: 0 10px;
+  }
+
+  footer {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
 
   h1 {
