@@ -56,6 +56,8 @@ function restartWithRandomWord() {
   grid.value = ''
   shakeRowIndex.value = -1
   success.value = false
+
+  allowInput = true
 }
 
 function onKey(key: string) {
