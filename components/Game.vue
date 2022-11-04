@@ -44,7 +44,7 @@ onUnmounted(() => {
 
 function restartWithRandomWord() {
   answer.value = getRandomWord()
-  
+
   board.value = initializeBoard()
 
   // @ts-ignore
@@ -83,7 +83,7 @@ function onKey(key: string) {
 function fillTile(letter: string) {
   for (const tile of currentRow.value) {
     if (!tile.letter) {
-      tile.letter = letter
+      tile.letter = letter === 'ı' ? 'Í' : letter
       break
     }
   }
