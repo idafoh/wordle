@@ -21,11 +21,12 @@ const specials = [rows[3][0], rows[3][8]]
 
 <template>
   <div :class="$style.keyboard">
-    <div v-for="(row, i) in rows" :class="[$style.row, i === 0 && $style.kaa]" >
+    <div v-for="(row, i) in rows" :class="[$style.row, i === 0 && $style.kaa]">
       <div :class="$style.spacer" v-if="i === 1" />
-      <button v-for="key in row" :class="[letterStates[key] || 'regular', specials.includes(key) && 'special', key.length > 1 && $style.big]"
+      <button v-for="key in row"
+        :class="[letterStates[key] || 'regular', specials.includes(key) && 'special', key.length > 1 && $style.big]"
         @click="$emit('key', key)">
-        <span v-if="key !== 'Backspace'">{{ key }}</span>
+        <span v-if="key !== 'Backspace'">{{ key === 'ı' ? 'Í' : key }}</span>
         <backspace-icon v-else />
       </button>
       <div :class="$style.spacer" v-if="i === 1" />
