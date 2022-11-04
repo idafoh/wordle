@@ -1,19 +1,20 @@
 <script setup lang="ts">
-import { getWordOfTheDay } from '~/words'
+import { getWordOfTheDay, getRandomWord } from '~/words'
 import { LetterState } from '~/types'
 
 // Get word of the day
-const answer = getWordOfTheDay()
+const wordOfTheDay = getWordOfTheDay()
 
 // Board state. Each tile is represented as { letter, state }
-const board = ref(
-  Array.from({ length: 6 }, () =>
-    Array.from({ length: 5 }, () => ({
-      letter: '',
-      state: LetterState.INITIAL
-    }))
-  )
+const initializeBoard = () => Array.from({ length: 6 }, () =>
+  Array.from({ length: 5 }, () => ({
+    letter: '',
+    state: LetterState.INITIAL
+  }))
 )
+
+const answer = ref(wordOfTheDay)
+const board = ref(initializeBoard())
 
 // Current active row.
 const currentRowIndex = ref(0)
@@ -40,6 +41,22 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('keyup', onKeyup)
 })
+
+function restartWithRandomWord() {
+  answer.value = getRandomWord()
+  
+  board.value = initializeBoard()
+
+  // @ts-ignore
+  letterStates.value = {}
+
+  currentRowIndex.value = 0
+
+  message.value = ''
+  grid.value = ''
+  shakeRowIndex.value = -1
+  success.value = false
+}
 
 function onKey(key: string) {
   if (!allowInput) return
@@ -90,7 +107,7 @@ function completeRow() {
   })
 
   useTrackEvent('guess', { props: { word: guess } })
-  
+
   if (currentRow.value.every((tile) => tile.letter)) {
 
     // if (!allWords.includes(guess) && guess !== answer) {
@@ -99,7 +116,7 @@ function completeRow() {
     //   return
     // }
 
-    const answerLetters: (string | null)[] = answer.split('')
+    const answerLetters: (string | null)[] = answer.value.split('')
 
     // first pass: mark correct ones
     currentRow.value.forEach((tile, i) => {
@@ -153,7 +170,7 @@ function completeRow() {
     } else {
       // game over :(
       setTimeout(() => {
-        showMessage(answer.toUpperCase(), -1)
+        showMessage(answer.value.toUpperCase(), -1)
       }, 1600)
     }
   } else {
@@ -203,6 +220,8 @@ function genResultGrid() {
       </teleport>
       {{ message }}
       <pre v-if="grid">{{ grid }}</pre>
+
+      <button @click="restartWithRandomWord">Jáne random sóz benen oynaw</button>
     </div>
   </Transition>
   <div :class="$style.board">
@@ -253,6 +272,11 @@ function genResultGrid() {
   transform: translateX(-50%);
   transition: opacity 0.3s ease-out;
   font-weight: 600;
+}
+
+.message button {
+  height: auto;
+  padding: 10px 1rem;
 }
 
 .message.v-leave-to {

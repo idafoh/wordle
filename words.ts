@@ -29,6 +29,12 @@ export function getWordOfTheDay() {
   return answers[day]
 }
 
+export function getRandomWord() {
+  const random = Math.floor(Math.random() * answers.length)
+
+  return answers[random]
+}
+
 
 const answers = [
   'abzal', 'abzac', 'abroy',
