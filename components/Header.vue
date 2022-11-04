@@ -63,7 +63,7 @@ onUnmounted(() => {
         hárip jasırılǵan sózde qollanılmaǵan.</p>
 
 
-      <p style="margin: 3rem 0;">Oyındı jánede qızıqlı etiw maqsetinde ózińiz sóz qosıp doslarıńızǵa jiberip oynasańızda
+      <p :class="$style.divider">Oyındı jánede qızıqlı etiw maqsetinde ózińiz sóz qosıp doslarıńızǵa jiberip oynasańızda
         boladı.</p>
 
 
@@ -74,7 +74,7 @@ onUnmounted(() => {
     </div>
   </pop-up>
   <pop-up>
-    <div v-if="isOpen" :class="$style.modal">
+    <div v-if="isOpen" :class="[$style.modal, $style['center-vertical']]">
       <teleport to="body">
         <div @click="isOpen = false" id="backdrop" />
       </teleport>
@@ -92,6 +92,10 @@ onUnmounted(() => {
 <style module>
 .custom {
   cursor: pointer;
+}
+
+.divider {
+  margin: 3rem 0;
 }
 
 .modal {
@@ -114,5 +118,21 @@ onUnmounted(() => {
   height: auto !important;
   margin: 5px auto !important;
   margin-top: 15px !important;
+}
+
+@media (max-width: 600px) {
+  .modal {
+    width: 80%;
+    top: 10px;
+    padding: 8px 12px;
+  }
+
+  .center-vertical {
+    top: 35%;
+  }
+
+  .divider {
+    margin: 12px 0;
+  }
 }
 </style>

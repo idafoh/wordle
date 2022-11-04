@@ -5,7 +5,7 @@ html, body {
 body {
   font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
   text-align: center;
-  max-width: 500px;
+  max-width: 550px;
   margin: 0 auto;
 }
 
@@ -49,4 +49,31 @@ header {
 
 .absent {
   background-color: #787c7e !important;
+}
+
+
+@media (max-width: 600px) {
+  body {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  header {
+    margin-top: 1rem;
+    padding: 0 10px;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  button:is(.absent, .correct, .present, .regular) {
+    height: 45px;
+    padding: 0 2vw;
+  }
+
+  .special {
+    padding: 0 7px !important;
+  }
 }

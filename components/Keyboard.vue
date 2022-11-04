@@ -15,13 +15,15 @@ const rows = [
   ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
   ['Enter', ...['z', 'x', 'c', 'v', 'b', 'n', 'm'], 'Backspace']
 ]
+
+const specials = [rows[3][0], rows[3][8]]
 </script>
 
 <template>
   <div :class="$style.keyboard">
-    <div :class="$style.row" v-for="(row, i) in rows">
+    <div v-for="(row, i) in rows" :class="[$style.row, i === 0 && $style.kaa]" >
       <div :class="$style.spacer" v-if="i === 1" />
-      <button v-for="key in row" :class="[letterStates[key], key.length > 1 && $style.big]"
+      <button v-for="key in row" :class="[letterStates[key] || 'regular', specials.includes(key) && 'special', key.length > 1 && $style.big]"
         @click="$emit('key', key)">
         <span v-if="key !== 'Backspace'">{{ key }}</span>
         <backspace-icon v-else />
@@ -42,6 +44,10 @@ const rows = [
   width: 100%;
   margin: 0 auto 8px;
   touch-action: manipulation;
+}
+
+.row.kaa {
+  width: 75%;
 }
 
 .spacer {
