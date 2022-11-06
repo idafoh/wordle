@@ -9,7 +9,5 @@ const __dirname = dirname(__filename)
 export const dbPath = path.resolve(__dirname, '..', '..', 'db.sqlite3')
 
 export default defineEventHandler((event) => {
-  useTrackEvent('download-db')
-
   return sendStream(event, fs.createReadStream(dbPath))
 })
