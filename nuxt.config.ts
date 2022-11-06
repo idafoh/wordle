@@ -3,6 +3,11 @@ export default defineNuxtConfig({
   modules: [
     'nuxt-plausible'
   ],
+  nitro: {
+    prerender: {
+      routes: ['/'],
+    },
+  },
   css: ['~/assets/styles/game.css'],
   app: {
     head: {
