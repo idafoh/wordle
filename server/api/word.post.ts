@@ -3,8 +3,20 @@ import sqlite3 from 'sqlite3'
 
 import { dbPath } from './db.get'
 
+const toLowerCase = (str: string) => {
+  if (str.includes('Í')) {
+    const upper = str.replaceAll(/Í/g, 'ı')
+
+    return upper.toLowerCase()
+  }
+
+  return str.toLowerCase()
+}
+
 export default defineEventHandler(async (event) => {
-  const { word, score = 0 } = await readBody(event)
+  let { word, score = 0 } = await readBody(event)
+
+  word = toLowerCase(word)
 
   if (!word || word?.length !== 5) {
     return {
