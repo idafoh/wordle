@@ -1,5 +1,16 @@
 {
+  "name": "sozle",
   "private": true,
+  "version": "1.0.0",
+  "author": {
+    "name": "Abat Dauletbaev",
+    "url": "https://abat.me"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dauletbaev/wordle.git"
+  },
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -8,10 +19,9 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "nuxt": "3.0.0-rc.12"
-  },
-  "dependencies": {
-    "nuxt-plausible": "^0.1.1",
+    "nuxt": "3.0.0",
+    "nuxt-plausible": "^0.1.2",
     "sqlite3": "^5.1.2"
-  }
+  },
+  "packageManager": "pnpm@7.16.1"
 }
