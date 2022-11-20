@@ -22,6 +22,5 @@
     "nuxt": "3.0.0",
     "nuxt-plausible": "^0.1.2",
     "sqlite3": "^5.1.2"
-  },
-  "packageManager": "pnpm@7.16.1"
+  }
 }
