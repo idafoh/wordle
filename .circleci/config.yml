@@ -15,7 +15,7 @@ jobs:
           command: npm run build
           name: Build app
       - persist_to_workspace:
-          root: /tmp/built
+          root: .
           paths:
             - ./output
 
@@ -23,11 +23,11 @@ jobs:
     machine: true
     steps:
       - attach_workspace:
-          at: /tmp/built
+          at: .
       - run:
           name: Deploy over SSH
           command: |
-            scp -r /tmp/built $USER@$IP:/home/circleci && ssh $USER@$IP "./app/scripts/deploy.sh"
+            scp -r ./.output $USER@$IP:/home/circleci && ssh $USER@$IP "./app/scripts/deploy.sh"
 
 # Orchestrate our job run sequence
 workflows:
