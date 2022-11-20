@@ -1,5 +1,0 @@
-#!/bin/bash
-
-cd ../
-
-pm2 restart ecosystem.config.js
