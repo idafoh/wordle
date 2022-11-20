@@ -27,7 +27,7 @@ jobs:
       - run:
           name: Deploy over SSH
           command: |
-            scp -r ./.output $USER@$IP:/home/circleci && ssh $USER@$IP "./app/scripts/deploy.sh"
+            scp -r ./.output ./ecosystem.config.js $USER@$IP:/home/circleci/sozle && ssh $USER@$IP "pm2 restart sozle/ecosystem.config.js"
 
 # Orchestrate our job run sequence
 workflows:
