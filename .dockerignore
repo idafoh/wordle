@@ -1,0 +1,17 @@
+.git*
+.circleci
+node_modules
+.DS_Store
+*.log*
+.nuxt
+.nitro
+.cache
+.output
+.env
+dist
+*.sqlite3
+*-lock.*
+.editorconfig
+ecosystem.config.js
+preview.png
+README.md
